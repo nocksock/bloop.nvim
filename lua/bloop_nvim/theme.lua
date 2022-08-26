@@ -166,7 +166,7 @@ local theme = lush(function()
     -- TSConstant           { } , -- Constants identifiers. These might not be semantically constant. E.g. uppercase variables in Python.
     -- TSConstBuiltin       { } , -- Built-in constant values: `nil` in Lua.
     -- TSConstMacro         { } , -- Constants defined by macros: `NULL` in C.
-    -- TSConstructor        { } , -- Constructor calls and definitions: `{}` in Lua, and Java constructors.
+    TSConstructor        { } , -- Constructor calls and definitions: `{}` in Lua, and Java constructors.
     -- TSError              { } , -- Syntax/parser errors. This might highlight large sections of code while the user is typing still incomplete code, use a sensible highlight.
     -- TSException          { } , -- Exception related keywords: `try`, `except`, `finally` in Python.
     TSField { Normal }, -- Object and struct fields.

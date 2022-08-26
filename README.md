@@ -1,4 +1,9 @@
-# A Lush Theme for Neovim.
+# BLOOP_NVIM
 
-See: http://git.io/lush.nvim for more information on Lush and a helper script
-to setup your repo clone.
+A minimalistic theme that focusses on keywords and hard coded values. While
+creating subtle visual hierarchy with a soft monochromatic palette for other
+texts.
+
+created using lush.
+
+

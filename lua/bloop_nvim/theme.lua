@@ -58,9 +58,9 @@ local theme = lush(function()
     -- SpellRare    { }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
     StatusLine { fg = bloop.fg_mute }, -- status line of current window
     StatusLineNC { fg = bloop.fg_subtle }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
-    TabLine { bg = bloop.bg_soft, fg = bloop.prime }, -- tab pages line, not active tab page label
+    TabLine { bg = bloop.bg_deep, fg = bloop.fg_mute }, -- tab pages line, not active tab page label
     TabLineFill { TabLine }, -- tab pages line, where there are no labels
-    TabLineSel { bg = bloop.bg_bright, fg = bloop.prime }, -- tab pages line, active tab page label
+    TabLineSel { bg = bloop.bg_bright, fg = bloop.accent }, -- tab pages line, active tab page label
     Visual { bg = bloop.bg_soft }, -- Visual mode selection
     VisualNOS { bg = bloop.bg_bright }, -- Visual mode selection when vim is "Not Owning the Selection".
     Whitespace { fg = bloop.fg_subtle }, -- "nbsp", "space", "tab" and "trail" in 'listchars'

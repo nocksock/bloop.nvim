@@ -20,6 +20,7 @@ local theme = lush(function()
     DiffDelete { fg = bloop.prime }, -- diff mode: Deleted line |diff.txt|
     DiffText { bg = bloop.bg_bright }, -- diff mode: Changed text within a changed line |diff.txt|
     EndOfBuffer { fg = bloop.fg_subtle }, -- filler lines (~) after the end of the buffer.  By default, this is highlighted like |hl-NonText|.
+    TermNormal { bg = bloop.bg_deep },
     TermCursor { gui = "reverse" }, -- cursor in a focused terminal
     TermCursorNC { bg = bloop.bg_bright }, -- cursor in an unfocused terminal
     Title { fg = bloop.fg }, -- titles for output from ":set all", ":autocmd" etc.
@@ -41,7 +42,7 @@ local theme = lush(function()
     LineNr { fg = bloop.bg_bright }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
     CursorLineNr { fg = bloop.prime }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
     MatchParen { fg = bloop.prime, bg = bloop.bg_soft }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
-    NonText { fg = bloop.fg_subtle }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
+    NonText { fg = bloop.bg_soft }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
     NormalFloat { Normal }, -- Normal text in floating windows.
     -- NormalNC { Normal }, -- normal text in non-current windows
     Pmenu { fg = bloop.fg }, -- Popup menu: normal item.
@@ -58,14 +59,13 @@ local theme = lush(function()
     -- SpellRare    { }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
     StatusLine { fg = bloop.fg_mute }, -- status line of current window
     StatusLineNC { fg = bloop.fg_subtle }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
-    TabLine { bg = bloop.bg_deep, fg = bloop.fg_mute }, -- tab pages line, not active tab page label
+    TabLine { fg = bloop.fg_mute }, -- tab pages line, not active tab page label
     TabLineFill { TabLine }, -- tab pages line, where there are no labels
     TabLineSel { bg = bloop.bg_bright, fg = bloop.accent }, -- tab pages line, active tab page label
     Visual { bg = bloop.bg_soft }, -- Visual mode selection
     VisualNOS { bg = bloop.bg_bright }, -- Visual mode selection when vim is "Not Owning the Selection".
-    Whitespace { fg = bloop.fg_subtle }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
+    Whitespace { NonText }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
     WildMenu { fg = bloop.fg, bg = bloop.bg_soft }, -- current match in 'wildmenu' completion
-
 
     -- standard group names for syntax highlighting.
 
@@ -126,12 +126,12 @@ local theme = lush(function()
 
     -- See :h lsp-highlight, some groups may not be listed, submit a PR fix to lush-template!
     --
-    -- LspReferenceText            { } , -- used for highlighting "text" references
-    -- LspReferenceRead            { } , -- used for highlighting "read" references
-    -- LspReferenceWrite           { } , -- used for highlighting "write" references
+    LspReferenceText { bg = bloop.bg_soft }, -- used for highlighting "text" references
+    LspReferenceRead { bg = bloop.bg_soft }, -- used for highlighting "read" references
+    LspReferenceWrite { bg = bloop.bg_soft }, -- used for highlighting "write" references
     -- LspCodeLens                 { } , -- Used to color the virtual text of the codelens. See |nvim_buf_set_extmark()|.
     -- LspCodeLensSeparator        { } , -- Used to color the seperator between two or more code lens.
-    -- LspSignatureActiveParameter { } , -- Used to highlight the active parameter in the signature help. See |vim.lsp.handlers.signature_help()|.
+    LspSignatureActiveParameter { LspReferenceText }, -- Used to highlight the active parameter in the signature help. See |vim.lsp.handlers.signature_help()|.
 
     -- See :h diagnostic-highlights, some groups may not be listed, submit a PR fix to lush-template!
     --
@@ -166,7 +166,8 @@ local theme = lush(function()
     -- TSConstant           { } , -- Constants identifiers. These might not be semantically constant. E.g. uppercase variables in Python.
     -- TSConstBuiltin       { } , -- Built-in constant values: `nil` in Lua.
     -- TSConstMacro         { } , -- Constants defined by macros: `NULL` in C.
-    TSConstructor        { } , -- Constructor calls and definitions: `{}` in Lua, and Java constructors.
+    -- TSConstructor        { } , -- Constructor calls and definitions: `{}` in Lua, and Java constructors.
+    luaTSConstructor { Noise },
     -- TSError              { } , -- Syntax/parser errors. This might highlight large sections of code while the user is typing still incomplete code, use a sensible highlight.
     -- TSException          { } , -- Exception related keywords: `try`, `except`, `finally` in Python.
     TSField { Normal }, -- Object and struct fields.
@@ -219,7 +220,8 @@ local theme = lush(function()
     -- TSTypeBuiltin        { } , -- Built-in types: `i32` in Rust.
     TSVariable { fg = Normal.fg }, -- Variable names that don't fit into other categories.
     TSVariableBuiltin { fg = bloop.accent }, -- Variable names defined by the language: `this` or `self` in Javascript.
-
+    TreesitterContext { bg = bloop.bg_deep },
+    TreesitterContextLineNumber { bg = bloop.bg_deep },
     NvimInternalError { ErrorMsg },
 
     GitSignsAdd { fg = bloop.accent }, -- diff mode: Added line |diff.txt|

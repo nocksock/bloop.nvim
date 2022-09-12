@@ -5,6 +5,7 @@ local bloop = require('bloop_nvim.palette')
 ---@diagnostic disable: undefined-global
 local theme = lush(function()
   return {
+    -- TODO: add option to no set bg value here for transparent backgrounds
     Normal { fg = bloop.fg, bg = bloop.bg }, -- normal text
     Comment { fg = bloop.fg_mute, gui = "italic" }, -- any comment
     ColorColumn { bg = bloop.bg_soft }, -- used for the columns set with 'colorcolumn'
@@ -39,7 +40,7 @@ local theme = lush(function()
     SignColumn { fg = bloop.fg_mute, }, -- column where |signs| are displayed
     IncSearch { fg = bloop.prime, bg = bloop.bg_soft }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
     Substitute { fg = bloop.prime, bg = bloop.prime_dark }, -- |:substitute| replacement text highlighting
-    LineNr { fg = bloop.bg_bright }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
+    LineNr { fg = bloop.fg_subtle }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
     CursorLineNr { fg = bloop.prime }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
     MatchParen { fg = bloop.prime, bg = bloop.bg_soft }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
     NonText { fg = bloop.bg_soft }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
@@ -69,7 +70,7 @@ local theme = lush(function()
 
     -- standard group names for syntax highlighting.
 
-    Constant { fg = bloop.accent }, -- (preferred) any constant
+    Constant { fg = bloop.accent, gui = "bold" }, -- (preferred) any constant
     Number { Constant }, --   a number constant: 234, 0xff
     Boolean { Constant }, --  a boolean constant: TRUE, false
     Float { Constant }, --    a floating point constant: 2.3e10
@@ -77,32 +78,33 @@ local theme = lush(function()
     Character { Constant }, --  a character constant: 'c', '\n'
 
     Identifier { fg = bloop.fg }, -- (preferred) any variable name
-    Function { Identifier }, -- function name (also: methods for classes)
+    Function { fg = bloop.secondary }, -- function name (also: methods for classes)
 
-    Keyword { fg = bloop.prime }, --  any other keyword
+    Keyword { fg = bloop.prime, gui = "bold" }, --  any other keyword
     Statement { Keyword }, -- (preferred) any statement
     Conditional { Statement }, --  if, then, else, endif, switch, etc.
     Repeat { Statement }, --   for, do, while, etc.
     Label { Statement }, --    case, default, etc.
     Operator { Statement }, -- "sizeof", "+", "*", etc.
 
-    Exception { fg = bloop.prime }, --  try, catch, throw
-
     PreProc { Keyword }, -- (preferred) generic Preprocessor
+    -- REVIEW: maybe add an option to toggle this with keyword/muted? 
+    --  I like how it looks when the import block has the fg_mute color instead.
+    --  But that'd be an exception to the keyword=prime rule. Worth it?
     Include { Keyword }, --  preprocessor #include
     -- Define         { }, --   preprocessor #define
     -- Macro          { }, --    same as Define
     -- PreCondit      { }, --  preprocessor #if, #else, #endif, etc.
 
-    Type { fg = bloop.fg_mute }, -- (preferred) int, long, char, etc.
+    Type { fg = bloop.prime_alt }, -- (preferred) int, long, char, etc.
     -- StorageClass   { }, -- static, register, volatile, etc.
     -- Structure      { }, --  struct, union, enum, etc.
-    Typedef { fg = bloop.fg_mute }, --  A typedef
+    Typedef { fg = bloop.prime_alt}, --  A typedef
 
     Special { fg = bloop.prime }, -- (preferred) any special symbol
     -- SpecialChar    { }, --  special character in a constant
-    SpecialComment { fg = bloop.accent }, -- special things inside a comment
-    Tag { fg = bloop.accent }, --    you can use CTRL-] on this
+    SpecialComment { fg = bloop.secondary }, -- special things inside a comment
+    Tag { fg = bloop.prime_alt }, --    you can use CTRL-] on this
     Debug { fg = bloop.prime_alt, bg = bloop.bg_soft }, --    debugging statements
 
     Underlined { gui = "underline" }, -- (preferred) text that stands out, HTML links
@@ -152,8 +154,8 @@ local theme = lush(function()
     -- DiagnosticFloatingInfo     { } , -- Used to color "Info" diagnostic messages in diagnostics float.
     -- DiagnosticFloatingHint     { } , -- Used to color "Hint" diagnostic messages in diagnostics float.
     DiagnosticSignError { fg = bloop.prime }, -- Used for "Error" signs in sign column.
-    DiagnosticSignWarn { fg = bloop.accent }, -- Used for "Warn" signs in sign column.
-    DiagnosticSignInfo { fg = bloop.accent_alt }, -- Used for "Info" signs in sign column.
+    DiagnosticSignWarn { fg = bloop.secondary }, -- Used for "Warn" signs in sign column.
+    DiagnosticSignInfo { fg = bloop.secondary_alt }, -- Used for "Info" signs in sign column.
     DiagnosticSignHint { fg = bloop.fg_subtle }, -- Used for "Hint" signs in sign column.
 
     -- See :h nvim-treesitter-highlights, some groups may not be listed, submit a PR fix to lush-template!
@@ -166,29 +168,29 @@ local theme = lush(function()
     -- TSConstant           { } , -- Constants identifiers. These might not be semantically constant. E.g. uppercase variables in Python.
     -- TSConstBuiltin       { } , -- Built-in constant values: `nil` in Lua.
     -- TSConstMacro         { } , -- Constants defined by macros: `NULL` in C.
-    -- TSConstructor        { } , -- Constructor calls and definitions: `{}` in Lua, and Java constructors.
+    TSConstructor        { fg = bloop.prime_alt } , -- Constructor calls and definitions: `{}` in Lua, and Java constructors.
     luaTSConstructor { Noise },
     -- TSError              { } , -- Syntax/parser errors. This might highlight large sections of code while the user is typing still incomplete code, use a sensible highlight.
     -- TSException          { } , -- Exception related keywords: `try`, `except`, `finally` in Python.
-    TSField { Normal }, -- Object and struct fields.
+    TSField { fg = bloop.secondary_alt }, -- Object and struct fields.
     -- TSFloat              { } , -- Floating-point number literals.
     -- TSFunction           { } , -- Function calls and definitions.
     -- TSFuncBuiltin        { } , -- Built-in functions: `print` in Lua.
     -- TSFuncMacro          { } , -- Macro defined functions (calls and definitions): each `macro_rules` in Rust.
-    TSInclude { fg = bloop.fg_mute }, -- File or module inclusion keywords: `#include` in C, `use` or `extern crate` in Rust.
+    -- TSInclude {}, -- File or module inclusion keywords: `#include` in C, `use` or `extern crate` in Rust.
     TSKeyword { Keyword }, -- Keywords that don't fit into other categories.
     TSKeywordFunction { Keyword }, -- Keywords used to define a function: `function` in Lua, `def` and `lambda` in Python.
     TSKeywordOperator { Keyword, gui = "italic" }, -- Unary and binary operators that are English words: `and`, `or` in Python; `sizeof` in C.
     TSKeywordReturn { Keyword, gui = "bold" }, -- Keywordr like `return` and `yield`.
     -- TSLabel              { } , -- GOTO labels: `label:` in C, and `::label::` in Lua.
-    TSMethod { fg = bloop.fg_mute }, -- Method calls and definitions.
-    TSNamespace { fg = bloop.fg_mute, gui = "italic" }, -- Identifiers referring to modules and namespaces.
+    TSMethod { fg = bloop.secondary }, -- Method calls and definitions.
+    TSNamespace { fg = bloop.secondary_alt, gui = "italic" }, -- Identifiers referring to modules and namespaces.
     -- TSNone               { } , -- No highlighting (sets all highlight arguments to `NONE`). this group is used to clear certain ranges, for example, string interpolations. Don't change the values of this highlight group.
     -- TSNumber             { } , -- Numeric literals that don't fit into other categories.
     TSOperator { Noise }, -- Binary or unary operators: `+`, and also `->` and `*` in C.
     -- TSParameter          { } , -- Parameters of a function.
     -- TSParameterReference { } , -- References to parameters of a function.
-    TSProperty { Normal }, -- Same as `TSField`.
+    TSProperty { fg = bloop.secondary_alt }, -- Same as `TSField`.
     TSPunctDelimiter { Noise }, -- Punctuation delimiters: Periods, commas, semicolons, etc.
     TSPunctBracket { Noise }, -- Brackets, braces, parentheses, etc.
     -- TSPunctSpecial       { } , -- Special punctuation that doesn't fit into the previous categories.

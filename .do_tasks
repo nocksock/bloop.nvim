@@ -1,5 +1,6 @@
 create bloop_nvim for backwards compat
 export kitty colors
+remove lush dependency?
 add kitty colors instructions to readme
 create :BloopToogle command
 create :BloopHue 123 command

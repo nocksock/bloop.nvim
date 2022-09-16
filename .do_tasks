@@ -1,0 +1,7 @@
+create bloop_nvim for backwards compat
+export kitty colors
+add kitty colors instructions to readme
+create :BloopToogle command
+create :BloopHue 123 command
+create :BloopVariant night command
+idea: UI for adjusting the Hue

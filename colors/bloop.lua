@@ -11,3 +11,4 @@ local theme = require('bloop_nvim.theme')
 
 -- TODO: remove lush dependency (embed lush helper or use shipwright)
 require('lush')(theme)
+

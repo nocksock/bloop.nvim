@@ -44,7 +44,7 @@ local theme = lush(function()
     CursorLineNr { fg = bloop.prime }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
     MatchParen { fg = bloop.prime, bg = bloop.bg_soft }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
     NonText { fg = bloop.bg_soft }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-    NormalFloat { Normal }, -- Normal text in floating windows.
+    NormalFloat { Normal, bg=bloop.bg_deep }, -- Normal text in floating windows.
     -- NormalNC { Normal }, -- normal text in non-current windows
     Pmenu { fg = bloop.fg }, -- Popup menu: normal item.
     PmenuSel { bg = bloop.bg_soft, fg = bloop.fg }, -- Popup menu: selected item.
@@ -70,7 +70,7 @@ local theme = lush(function()
 
     -- standard group names for syntax highlighting.
 
-    Constant { fg = bloop.accent, gui = "bold" }, -- (preferred) any constant
+    Constant { fg = bloop.accent }, -- (preferred) any constant
     Number { Constant }, --   a number constant: 234, 0xff
     Boolean { Constant }, --  a boolean constant: TRUE, false
     Float { Constant }, --    a floating point constant: 2.3e10
@@ -80,7 +80,7 @@ local theme = lush(function()
     Identifier { fg = bloop.fg }, -- (preferred) any variable name
     Function { fg = bloop.secondary }, -- function name (also: methods for classes)
 
-    Keyword { fg = bloop.prime, gui = "bold" }, --  any other keyword
+    Keyword { fg = bloop.prime }, --  any other keyword
     Statement { Keyword }, -- (preferred) any statement
     Conditional { Statement }, --  if, then, else, endif, switch, etc.
     Repeat { Statement }, --   for, do, while, etc.
@@ -88,7 +88,7 @@ local theme = lush(function()
     Operator { Statement }, -- "sizeof", "+", "*", etc.
 
     PreProc { Keyword }, -- (preferred) generic Preprocessor
-    -- REVIEW: maybe add an option to toggle this with keyword/muted? 
+    -- REVIEW: maybe add an option to toggle this with keyword/muted?
     --  I like how it looks when the import block has the fg_mute color instead.
     --  But that'd be an exception to the keyword=prime rule. Worth it?
     Include { Keyword }, --  preprocessor #include
@@ -99,7 +99,7 @@ local theme = lush(function()
     Type { fg = bloop.prime_alt }, -- (preferred) int, long, char, etc.
     -- StorageClass   { }, -- static, register, volatile, etc.
     -- Structure      { }, --  struct, union, enum, etc.
-    Typedef { fg = bloop.prime_alt}, --  A typedef
+    Typedef { fg = bloop.prime_alt }, --  A typedef
 
     Special { fg = bloop.prime }, -- (preferred) any special symbol
     -- SpecialChar    { }, --  special character in a constant
@@ -168,7 +168,7 @@ local theme = lush(function()
     -- TSConstant           { } , -- Constants identifiers. These might not be semantically constant. E.g. uppercase variables in Python.
     -- TSConstBuiltin       { } , -- Built-in constant values: `nil` in Lua.
     -- TSConstMacro         { } , -- Constants defined by macros: `NULL` in C.
-    TSConstructor        { fg = bloop.prime_alt } , -- Constructor calls and definitions: `{}` in Lua, and Java constructors.
+    TSConstructor { fg = bloop.prime_alt }, -- Constructor calls and definitions: `{}` in Lua, and Java constructors.
     luaTSConstructor { Noise },
     -- TSError              { } , -- Syntax/parser errors. This might highlight large sections of code while the user is typing still incomplete code, use a sensible highlight.
     -- TSException          { } , -- Exception related keywords: `try`, `except`, `finally` in Python.

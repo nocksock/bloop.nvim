@@ -1,6 +1,6 @@
-vim.g.colors_name = "bloop"
-vim.g.bloop_variant = "default"
-vim.g.bloop_base_hue = 335
+vim.g.colors_name = 'bloop-gruv'
+vim.g.bloop_variant = "night"
+vim.g.bloop_base_hue = 90
 
 -- always use current files
 package.loaded['bloop_nvim.palette'] = nil
@@ -11,3 +11,4 @@ local theme = require('bloop_nvim.theme')
 
 -- TODO: remove lush dependency (embed lush helper or use shipwright)
 require('lush')(theme)
+

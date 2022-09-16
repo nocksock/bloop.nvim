@@ -1,6 +1,6 @@
-# BLOOP_NVIM
+-- 🚧 Work In Progress
 
--- Work In Progress 
+# bloob
 
 ```
 
@@ -16,11 +16,9 @@
 
 ```
 
-A minimalistic theme that focusses on keywords and hard coded values. While
-creating a subtle visual hierarchy with a soft monochromatic palette for other
-texts.
-
-![](assets/go.png)
+![](assets/bloop-go.png)
+![](assets/bloop-night-go.png)
+![](assets/bloop-mirage-go.png)
 
 Requires [lush.nvim](https://github.com/rktjmp/lush.nvim)
 
@@ -30,8 +28,3 @@ Requires [lush.nvim](https://github.com/rktjmp/lush.nvim)
 use('https://github.com/rktjmp/lush.nvim')
 use('https://github.com/nocksock/bloop.nvim')
 ```
-
-## TODO
-
-- [ ] create build without lush dependency
-- [ ] include terminal themes

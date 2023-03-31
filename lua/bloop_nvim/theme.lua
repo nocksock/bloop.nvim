@@ -10,7 +10,7 @@ local theme = lush(function()
     Comment { fg = bloop.fg_mute, gui = "italic" }, -- any comment
     ColorColumn { bg = bloop.bg_soft }, -- used for the columns set with 'colorcolumn'
     Conceal { fg = bloop.accent_alt }, -- placeholder characters substituted for concealed text (see 'conceallevel')
-    Cursor { fg = bloop.accent, bg = bloop.prime }, -- character under the cursor
+    Cursor { fg = bloop.black, bg = bloop.prime_dark }, -- character under the cursor
     -- lCursor      { }, -- the character under the cursor when |language-mapping| is used (see 'guicursor')
     CursorIM {}, -- like Cursor, but used when in IME mode |CursorIM|
     CursorColumn { bg = bloop.bg_bright }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
@@ -27,7 +27,7 @@ local theme = lush(function()
     Title { fg = bloop.fg }, -- titles for output from ":set all", ":autocmd" etc.
     ErrorMsg { fg = bloop.prime, bg = bloop.prime_dark }, -- error messages on the command line
     InfoMsg { fg = bloop.fg_mute },
-    WarnMsg { fg = bloop.accent, bg = bloop.prime_dark, gui = "bold" },
+    WarnMsg { fg = bloop.fg_mute, bg = bloop.bg_deep, gui = "bold" },
     HintMsg { fg = bloop.accent, gui = "italic" },
     MsgArea { fg = bloop.fg_mute }, -- Area for messages and cmdline
     MsgSeparator { fg = bloop.fg_subtle }, -- Separator for scrolled messages, `msgsep` flag of 'display'
